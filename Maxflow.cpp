@@ -10,9 +10,10 @@
 #include "DirectedFlowGraph.h"
 using namespace std;
 
-int main() {
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+int main()
+{
+  cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 
-	DirectedFlowGraph test(3);
-	return 0;
+  DirectedFlowGraph test(3);
+  return 0;
 }
