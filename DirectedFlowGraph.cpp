@@ -91,3 +91,45 @@ DirectedFlowGraph::Node DirectedFlowGraph::getSink()
   result.index = 1;
   return result;
 }
+
+void DirectedFlowGraph::populateRandom(int max_capacity,
+    int percent_connectedness)
+{
+
+  //Fill with random data
+  for (int i = 0; i < getNumNodes(); i++)
+  {
+    for (int j = 0; j < getNumNodes(); j++)
+    {
+      //Roll the dice to see if we create a connection
+      if ((rand() % 100) < percent_connectedness)
+      {
+        m_adjacency_matrix[i][j].capacity = rand() % max_capacity;
+      }
+      else
+      {
+        m_adjacency_matrix[i][j].capacity = 0;
+      }
+    }
+  }
+
+  //Eliminate self-connections
+  for (int i = 0; i < getNumNodes(); i++)
+  {
+    m_adjacency_matrix[i][i].capacity = 0;
+  }
+
+  //Make sure that source has no connections going in
+  for (int i = 1; i < getNumNodes(); i++)
+  {
+    m_adjacency_matrix[i][0].capacity = 0;
+  }
+
+  //Make sure that sink has no connections going out
+  for (int i = 1; i < getNumNodes(); i++)
+  {
+    m_adjacency_matrix[1][i].capacity = 0;
+  }
+
+  return;
+}

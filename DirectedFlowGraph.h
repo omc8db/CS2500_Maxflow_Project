@@ -55,13 +55,19 @@ public:
   std::vector<DirectedFlowEdge> getAllEdgesWithSlack(const Node& start_node);
 
 //--------------Mutators----------------------//
-  void populateRandom();
+  //Assigns a set of random capacities.
+  // Inputs: max_capacity - All assigned capacities will be less than or equal to this value
+  //         percent_connectedness - Chance for a connection to exist between any two nodes. 0 to 100
+  void populateRandom(int max_capacity, int percent_connectedness);
 
 private:
 //---------------Types----------------------//
   struct adjacencyMatrixEntry;
 
 //---------------Members----------------------//
+
+  //Data is accessed as m_adjacency_matrix[from][to]
+  //index 0 is reserved for source, 1 is sink
   adjacencyMatrixEntry** m_adjacency_matrix;
   int m_num_nodes;
 };
