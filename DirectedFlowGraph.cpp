@@ -139,18 +139,18 @@ std::vector<DirectedFlowGraph::DirectedFlowEdge> DirectedFlowGraph::getEdgesWith
   std::vector<DirectedFlowGraph::DirectedFlowEdge> temp;
 
   temp = DirectedFlowGraph::getOutEdges(start_node);
-  for(unsigned int i = 0; i < temp.size(); i++)
+  for (unsigned int i = 0; i < temp.size(); i++)
   {
-    if(temp[i].flow < temp[i].capacity)
+    if (temp[i].flow < temp[i].capacity)
     {
       result.push_back(temp[i]);
     }
   }
 
   temp = DirectedFlowGraph::getInEdges(start_node);
-  for(unsigned int i = 0; i < temp.size(); i ++)
+  for (unsigned int i = 0; i < temp.size(); i++)
   {
-    if(temp[i].flow > 0)
+    if (temp[i].flow > 0)
     {
       result.push_back(temp[i]);
     }
@@ -200,6 +200,28 @@ void DirectedFlowGraph::populateRandom(int max_capacity,
     m_adjacency_matrix[1][i].capacity = 0;
   }
 
+//Eliminate loops
+  for (int i = 0; i < getNumNodes(); i++)
+  {
+    for (int j = 0; j < getNumNodes(); j++)
+    {
+      //If capacities from i to j and from j to i are nonzero
+      //Delete one of them
+      if ((m_adjacency_matrix[i][j].capacity != 0)
+          && (m_adjacency_matrix[j][i].capacity != 0))
+      {
+        //50 / 50 chance for which edge to delete
+        if (rand() % 2)
+        {
+          m_adjacency_matrix[i][j].capacity = 0;
+        }
+        else
+        {
+          m_adjacency_matrix[j][i].capacity = 0;
+        }
+      }
+    }
+  }
   return;
 }
 
