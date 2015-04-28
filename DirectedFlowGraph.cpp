@@ -50,3 +50,44 @@ DirectedFlowGraph::~DirectedFlowGraph()
   delete[] m_adjacency_matrix;
 }
 
+std::ostream& operator<<(std::ostream& out, DirectedFlowGraph& rhs)
+{
+  for (int i = 0; i < rhs.getNumNodes(); i++)
+  {
+    out << "-----\t";
+  }
+  out << std::endl;
+  for (int i = 0; i < rhs.getNumNodes(); i++)
+  {
+    for (int j = 0; j < rhs.getNumNodes(); j++)
+    {
+      out << "| " << rhs.m_adjacency_matrix[i][j].flow << " / "
+          << rhs.m_adjacency_matrix[i][j].capacity << "\t";
+    }
+    out << "|" << std::endl;
+  }
+  for (int i = 0; i < rhs.getNumNodes(); i++)
+  {
+    out << "-----\t";
+  }
+  return out;
+}
+
+int DirectedFlowGraph::getNumNodes()
+{
+  return m_num_nodes;
+}
+
+DirectedFlowGraph::Node DirectedFlowGraph::getSource()
+{
+  DirectedFlowGraph::Node result;
+  result.index = 0;
+  return result;
+}
+
+DirectedFlowGraph::Node DirectedFlowGraph::getSink()
+{
+  DirectedFlowGraph::Node result;
+  result.index = 1;
+  return result;
+}

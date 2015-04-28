@@ -15,5 +15,6 @@ int main()
   cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 
   DirectedFlowGraph test(3);
+  cout << test;
   return 0;
 }

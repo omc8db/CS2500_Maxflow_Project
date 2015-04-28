@@ -33,12 +33,15 @@ public:
 
 //---------------Accessors----------------------//
 
-  // Outputs the directed flow graph in the form of XML
-  friend std::ostream& operator<<(std::ostream& lhs, DirectedFlowGraph& rhs);
+// Outputs the directed flow graph in the form of XML
+  friend std::ostream& operator<<(std::ostream& out, DirectedFlowGraph& rhs);
+
+  //Outputs the number of nodes in the graph, including source and sink
+  int getNumNodes();
 
   //Returns a node object referring to the source or sink, respectively
-  Node* getSource();
-  Node* getSink();
+  Node getSource();
+  Node getSink();
 
   // Returns a list of all edges flowing out of the given node, whether or not
   // there is any slack

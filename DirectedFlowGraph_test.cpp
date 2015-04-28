@@ -7,3 +7,7 @@
 
 #include "DirectedFlowGraph.h"
 
+void TestDirectedFlowGraph(DirectedFlowGraph& target)
+{
+
+}
