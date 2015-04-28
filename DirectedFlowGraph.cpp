@@ -128,7 +128,7 @@ std::vector<DirectedFlowGraph::DirectedFlowEdge> DirectedFlowGraph::getAllEdges(
   in_edges = getInEdges(start_node);
 
   result.insert(result.end(), out_edges.begin(), out_edges.end());
-  result.insert(result.end(), out_edges.begin(), out_edges.end());
+  result.insert(result.end(), in_edges.begin(), in_edges.end());
   return result;
 }
 
