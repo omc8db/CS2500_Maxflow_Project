@@ -57,9 +57,7 @@ public:
   std::vector<DirectedFlowEdge> getAllEdges(const Node& start_node);
 
   //Returns a list of the edges flowing out of the given node with slack
-  std::vector<DirectedFlowEdge> getOutEdgesWithSlack(const Node& start_node);
-  std::vector<DirectedFlowEdge> getInEdgesWithSlack(const Node& start_node);
-  std::vector<DirectedFlowEdge> getAllEdgesWithSlack(const Node& start_node);
+  std::vector<DirectedFlowEdge> getEdgesWithSlack(const Node& start_node);
 
 //--------------Mutators----------------------//
   //Assigns a set of random capacities.
@@ -69,7 +67,7 @@ public:
 
   // Set the flow of a specified edge.
   // Specified flow must be greater than 0 and less than or equal to the capacity of the edge
-  void setFlow(const DirectedFlowEdge& edge, int flow);
+  void setFlow(DirectedFlowEdge& edge, int flow);
 
 private:
 //---------------Types----------------------//

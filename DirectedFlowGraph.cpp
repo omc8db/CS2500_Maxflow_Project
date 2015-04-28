@@ -132,71 +132,33 @@ std::vector<DirectedFlowGraph::DirectedFlowEdge> DirectedFlowGraph::getAllEdges(
   return result;
 }
 
-std::vector<DirectedFlowGraph::DirectedFlowEdge> DirectedFlowGraph::getOutEdgesWithSlack(
+std::vector<DirectedFlowGraph::DirectedFlowEdge> DirectedFlowGraph::getEdgesWithSlack(
     const Node& start_node)
 {
   std::vector<DirectedFlowGraph::DirectedFlowEdge> result;
-  DirectedFlowGraph::DirectedFlowEdge buffer;
+  std::vector<DirectedFlowGraph::DirectedFlowEdge> temp;
 
-  for (int i = 0; i < getNumNodes(); i++)
+  temp = DirectedFlowGraph::getOutEdges(start_node);
+  for(unsigned int i = 0; i < temp.size(); i++)
   {
-    //From start_node.index to node i
-    if (m_adjacency_matrix[start_node.index][i].capacity > 0)
+    if(temp[i].flow < temp[i].capacity)
     {
-      if (m_adjacency_matrix[start_node.index][i].flow
-          < m_adjacency_matrix[start_node.index][i].capacity)
-      {
-
-        buffer.capacity = m_adjacency_matrix[start_node.index][i].capacity;
-        buffer.flow = m_adjacency_matrix[start_node.index][i].flow;
-        buffer.parent = start_node;
-        buffer.child.index = i;
-
-        result.push_back(buffer);
-      }
+      result.push_back(temp[i]);
     }
   }
-  return result;
-}
 
-std::vector<DirectedFlowGraph::DirectedFlowEdge> DirectedFlowGraph::getInEdgesWithSlack(
-    const Node& start_node)
-{
-  std::vector<DirectedFlowGraph::DirectedFlowEdge> result;
-  DirectedFlowGraph::DirectedFlowEdge buffer;
-
-  for (int i = 0; i < getNumNodes(); i++)
+  temp = DirectedFlowGraph::getInEdges(start_node);
+  for(unsigned int i = 0; i < temp.size(); i ++)
   {
-    //From i to start_node.index
-    if (m_adjacency_matrix[i][start_node.index].capacity > 0)
+    if(temp[i].flow > 0)
     {
-      if (m_adjacency_matrix[i][start_node.index].flow
-          < m_adjacency_matrix[i][start_node.index].capacity)
-      {
-        buffer.capacity = m_adjacency_matrix[i][start_node.index].capacity;
-        buffer.flow = m_adjacency_matrix[i][start_node.index].flow;
-        buffer.parent.index = i;
-        buffer.child = start_node;
-
-        result.push_back(buffer);
-      }
+      result.push_back(temp[i]);
     }
   }
+
   return result;
 }
 
-std::vector<DirectedFlowGraph::DirectedFlowEdge> DirectedFlowGraph::getAllEdgesWithSlack(
-    const Node& start_node)
-{
-  std::vector<DirectedFlowGraph::DirectedFlowEdge> out_edges, in_edges, result;
-
-  out_edges = getOutEdgesWithSlack(start_node);
-  in_edges = getInEdgesWithSlack(start_node);
-
-  result.insert(result.end(), out_edges.begin(), out_edges.end());
-  result.insert(result.end(), out_edges.begin(), out_edges.end());
-  return result;
-}
 //--------------Mutators----------------------//
 
 void DirectedFlowGraph::populateRandom(int max_capacity,
@@ -241,11 +203,12 @@ void DirectedFlowGraph::populateRandom(int max_capacity,
   return;
 }
 
-void DirectedFlowGraph::setFlow(const DirectedFlowEdge& edge, int flow)
+void DirectedFlowGraph::setFlow(DirectedFlowEdge& edge, int flow)
 {
   assert(flow <= edge.capacity);
   assert(flow > 0);
 
   //Flow from parent to child = flow
   m_adjacency_matrix[edge.parent.index][edge.child.index].flow = flow;
+  edge.flow = flow;
 }
