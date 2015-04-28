@@ -33,6 +33,16 @@ void TestDirectedFlowGraph(DirectedFlowGraph& target)
   test_node = target.getSink();
   edgeTest(target, test_node);
 
+  cout << "Maxing out flow from source" << endl;
+  std::vector<DirectedFlowGraph::DirectedFlowEdge> source_out_edges;
+  source_out_edges = target.getOutEdgesWithSlack(target.getSource());
+  for(unsigned int i = 0; i < source_out_edges.size(); i++)
+  {
+    target.setFlow(source_out_edges[i], source_out_edges[i].capacity);
+  }
+  cout << target << endl;
+
+  return;
 }
 
 void edgeTest(DirectedFlowGraph& target, DirectedFlowGraph::Node node)

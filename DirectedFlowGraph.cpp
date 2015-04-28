@@ -240,3 +240,12 @@ void DirectedFlowGraph::populateRandom(int max_capacity,
 
   return;
 }
+
+void DirectedFlowGraph::setFlow(const DirectedFlowEdge& edge, int flow)
+{
+  assert(flow <= edge.capacity);
+  assert(flow > 0);
+
+  //Flow from parent to child = flow
+  m_adjacency_matrix[edge.parent.index][edge.child.index].flow = flow;
+}
