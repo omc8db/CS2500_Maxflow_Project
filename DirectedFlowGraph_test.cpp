@@ -2,7 +2,7 @@
  * DirectedFlowGraph_test.cpp
  *
  *  Created on: Apr 27, 2015
- *      Author: mrdtdev
+ *      Author: Owen Chiaventone
  */
 
 #include "DirectedFlowGraph.h"

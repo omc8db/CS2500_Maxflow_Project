@@ -2,7 +2,7 @@
  * EdmondsKarp.cpp
  *
  *  Created on: Apr 28, 2015
- *      Author: mrdtdev
+ *      Author: Owen Chiaventone
  */
 
 #include "EdmondsKarp.h"
@@ -26,7 +26,7 @@ std::vector<DirectedFlowGraph::DirectedFlowEdge> RecursiveMinCut(
     return result;
   }
 
-  for (int i = 0; i < out_edges.size(); i++)
+  for (unsigned int i = 0; i < out_edges.size(); i++)
   {
 
     if (out_edges[i].flow == out_edges[i].capacity)
