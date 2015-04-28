@@ -14,7 +14,7 @@ void TestDirectedFlowGraph(DirectedFlowGraph& target)
   cout << target << endl;
 
   cout << "Populating with random data" << endl;
-  target.populateRandom(10, 100);
+  target.populateRandom(100, 60);
   cout << target << endl;
 
   cout << "Edges of node 3" << endl << endl;

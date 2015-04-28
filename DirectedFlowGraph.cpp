@@ -7,7 +7,6 @@
 
 #include "DirectedFlowGraph.h"
 
-
 //---------------Constructor / Destructor----------------------//
 
 DirectedFlowGraph::DirectedFlowGraph(int intermediate_nodes)
@@ -38,7 +37,7 @@ std::ostream& operator<<(std::ostream& out, DirectedFlowGraph& rhs)
 {
   for (int i = 0; i < rhs.getNumNodes(); i++)
   {
-    out << "-----\t";
+    out << "-----\t\t";
   }
   out << std::endl;
   for (int i = 0; i < rhs.getNumNodes(); i++)
@@ -46,13 +45,13 @@ std::ostream& operator<<(std::ostream& out, DirectedFlowGraph& rhs)
     for (int j = 0; j < rhs.getNumNodes(); j++)
     {
       out << "| " << rhs.m_adjacency_matrix[i][j].flow << " / "
-          << rhs.m_adjacency_matrix[i][j].capacity << "\t";
+          << rhs.m_adjacency_matrix[i][j].capacity << "     \t";
     }
     out << "|" << std::endl;
   }
   for (int i = 0; i < rhs.getNumNodes(); i++)
   {
-    out << "-----\t";
+    out << "-----\t\t";
   }
   return out;
 }
