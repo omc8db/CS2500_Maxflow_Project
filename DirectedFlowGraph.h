@@ -12,10 +12,6 @@
 #include <vector>
 #include <stdlib.h>
 
-//Interface struct
-
-//Used internally. Not recommended for external use.
-
 class DirectedFlowGraph
 {
 public:

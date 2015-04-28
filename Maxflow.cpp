@@ -8,13 +8,17 @@
 
 #include <iostream>
 #include "DirectedFlowGraph.h"
+//#include "DirectedFlowGraph_test.cpp"
 using namespace std;
+
+
+extern void TestDirectedFlowGraph(DirectedFlowGraph& target);
 
 int main()
 {
-  cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-
+  cout << "Beginning Test" << endl; // prints !!!Hello World!!!
+  srand(time(NULL));
   DirectedFlowGraph test(3);
-  cout << test;
+  TestDirectedFlowGraph(test);
   return 0;
 }
