@@ -7,27 +7,6 @@
 
 #include "DirectedFlowGraph.h"
 
-//---------------Types----------------------//
-
-struct DirectedFlowGraph::Node
-{
-  int index;
-};
-
-struct DirectedFlowGraph::DirectedFlowEdge
-{
-
-  int capacity;
-  int flow;
-  DirectedFlowGraph::Node parent;
-  DirectedFlowGraph::Node child;
-};
-
-struct DirectedFlowGraph::adjacencyMatrixEntry
-{
-  int capacity;
-  int flow;
-};
 
 //---------------Constructor / Destructor----------------------//
 
@@ -130,8 +109,8 @@ std::vector<DirectedFlowGraph::DirectedFlowEdge> DirectedFlowGraph::getInEdges(
     //From i to start_node.index
     if (m_adjacency_matrix[i][start_node.index].capacity > 0)
     {
-      buffer.capacity = m_adjacency_matrix[start_node.index][i].capacity;
-      buffer.flow = m_adjacency_matrix[start_node.index][i].flow;
+      buffer.capacity = m_adjacency_matrix[i][start_node.index].capacity;
+      buffer.flow = m_adjacency_matrix[i][start_node.index].flow;
       buffer.parent.index = i;
       buffer.child = start_node;
 

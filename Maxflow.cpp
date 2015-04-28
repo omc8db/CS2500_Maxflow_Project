@@ -20,5 +20,7 @@ int main()
   srand(time(NULL));
   DirectedFlowGraph test(3);
   TestDirectedFlowGraph(test);
+
+
   return 0;
 }
