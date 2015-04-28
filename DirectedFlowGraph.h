@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
+#include <assert.h>
 
 class DirectedFlowGraph
 {
@@ -65,6 +66,10 @@ public:
   // Inputs: max_capacity - All assigned capacities will be less than or equal to this value
   //         percent_connectedness - Chance for a connection to exist between any two nodes. 0 to 100
   void populateRandom(int max_capacity, int percent_connectedness);
+
+  // Set the flow of a specified edge.
+  // Specified flow must be greater than 0 and less than or equal to the capacity of the edge
+  void setFlow(const DirectedFlowEdge& edge, int flow);
 
 private:
 //---------------Types----------------------//
