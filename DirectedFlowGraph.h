@@ -12,16 +12,22 @@
 #include <vector>
 #include <stdlib.h>
 
-//Interface struct
-
-//Used internally. Not recommended for external use.
-
 class DirectedFlowGraph
 {
 public:
 //---------------Types----------------------//
-  struct Node;
-  struct DirectedFlowEdge;
+  struct Node
+  {
+    int index;
+  };
+
+  struct DirectedFlowEdge
+  {
+    int capacity;
+    int flow;
+    DirectedFlowGraph::Node parent;
+    DirectedFlowGraph::Node child;
+  };
 
 //---------------Constructor / Destructor----------------------//
 
@@ -62,7 +68,11 @@ public:
 
 private:
 //---------------Types----------------------//
-  struct adjacencyMatrixEntry;
+  struct adjacencyMatrixEntry
+  {
+    int capacity;
+    int flow;
+  };
 
 //---------------Members----------------------//
 
