@@ -8,6 +8,8 @@
 #include "DirectedFlowGraph.h"
 using namespace std;
 
+void edgeTest(DirectedFlowGraph& target, DirectedFlowGraph::Node node);
+
 void TestDirectedFlowGraph(DirectedFlowGraph& target)
 {
   cout << "After creation:" << endl;
@@ -18,13 +20,27 @@ void TestDirectedFlowGraph(DirectedFlowGraph& target)
   cout << target << endl;
 
   cout << "Edges of node 3" << endl << endl;
-  std::vector<DirectedFlowGraph::DirectedFlowEdge> edges;
-  DirectedFlowGraph::Node node_3;
-  node_3.index = 3;
 
+  DirectedFlowGraph::Node test_node;
+  test_node.index = 3;
+  edgeTest(target, test_node);
+
+  cout << "Edges of source" << endl << endl;
+  test_node =  target.getSource();
+  edgeTest(target, test_node);
+
+  cout << "Edges of sink" << endl << endl;
+  test_node = target.getSink();
+  edgeTest(target, test_node);
+
+}
+
+void edgeTest(DirectedFlowGraph& target, DirectedFlowGraph::Node node)
+{
+  std::vector<DirectedFlowGraph::DirectedFlowEdge> edges;
   cout << "Out edges" << endl;
-  edges = target.getOutEdges(node_3);
-  for (int i = 0; i < edges.size(); i++)
+  edges = target.getOutEdges(node);
+  for (unsigned int i = 0; i < edges.size(); i++)
   {
     cout << "Edge from " << edges[i].parent.index << " to "
         << edges[i].child.index << ", capacity = " << edges[i].capacity << endl;
@@ -32,8 +48,8 @@ void TestDirectedFlowGraph(DirectedFlowGraph& target)
   cout << endl;
 
   cout << "In edges" << endl;
-  edges = target.getInEdges(node_3);
-  for (int i = 0; i < edges.size(); i++)
+  edges = target.getInEdges(node);
+  for (unsigned int i = 0; i < edges.size(); i++)
   {
     cout << "Edge from " << edges[i].parent.index << " to "
         << edges[i].child.index << ", capacity = " << edges[i].capacity << endl;
