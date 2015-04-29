@@ -9,8 +9,13 @@
 #define EDMONDSKARP_H_
 
 #include "DirectedFlowGraph.h"
-#include <queue>
+#include <deque>
 #include <vector>
+#include <algorithm>
+
+//Reserve a value of negative one to represent infinite possible flow
+const int INFINITY = -1;
+
 
 // Calculates the maxflow for a given DirectedFlowGraph
 // Inputs: graph to calculate maxflow for

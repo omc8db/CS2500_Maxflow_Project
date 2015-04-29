@@ -10,22 +10,59 @@
 int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
 {
   std::deque<DirectedFlowGraph::Node> Q;
-  DirectedFlowGraph::Node current;
-  int maxflow;
+  DirectedFlowGraph::Node current, temp;
+  int maxflow, slack;
+  std::vector<DirectedFlowGraph::DirectedFlowEdge> edges;
+  DirectedFlowGraph::Node* parent;
+  int* value;
+  bool* inserted;
 
 
-  //No nodes start out inserted
-  bool* inserted = new bool[graph.getNumNodes()];
-  for(int i = 0; i < graph.getNumNodes(); i++)
+
+
+
+  current = graph.getSource();
+  value[current.index] = INFINITY;
+  inserted[graph.getSource().index] = false;
+  Q.push_back(current);
+
+  while(!Q.empty())
   {
-    inserted[i] = false;
-    //TODO: assert
+    current = Q.front();
+    Q.pop_front();
+
+    //No nodes start out inserted
+    inserted = new bool[graph.getNumNodes()];
+    value = new int[graph.getNumNodes];
+    for(int i = 0; i < graph.getNumNodes(); i++)
+    {
+      inserted[i] = false;
+      value[i] = 0;
+      //TODO: assert
+    }
+
+    edges = graph.getOutEdges(current);
+    for(int i = 0; i < edges.size(); i++)
+    {
+      if(inserted[edges[i].child.index] == false)
+      {
+        slack = edges[i].capacity - edges[i].flow;
+        assert(slack >= 0);
+        if(slack > 0)
+        {
+          temp = edges[i].child;
+
+        }
+      }
+
+      delete[] inserted;
+      delete[] value;
+    }
+
+
   }
 
-  Q.push_back(graph.getSource());
-  inserted[graph.getSource().index] = false;
-
-
+  delete[] inserted;
   //Dummy value
   return 1;
 }
