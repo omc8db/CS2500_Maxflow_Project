@@ -7,6 +7,29 @@
 
 #include "EdmondsKarp.h"
 
+int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
+{
+  std::deque<DirectedFlowGraph::Node> Q;
+  DirectedFlowGraph::Node current;
+  int maxflow;
+
+
+  //No nodes start out inserted
+  bool* inserted = new bool[graph.getNumNodes()];
+  for(int i = 0; i < graph.getNumNodes(); i++)
+  {
+    inserted[i] = false;
+    //TODO: assert
+  }
+
+  Q.push_back(graph.getSource());
+  inserted[graph.getSource().index] = false;
+
+
+  //Dummy value
+  return 1;
+}
+
 std::vector<DirectedFlowGraph::DirectedFlowEdge> CalculateMinCut(
     DirectedFlowGraph& graph)
 {
