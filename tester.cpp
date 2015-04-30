@@ -14,34 +14,37 @@ using namespace std;
 
 void autotest()
 {
-    int size, time_start, time_end, total_time, max_flow;
-    float percent;
-    ofstream output_file;
-    vector<DirectedFlowGraph::DirectedFlowEdge> mincut;
-    output_file.open("results.csv", ios::trunc);
-
-    output_file<<"Graph size, Percent Connections, Maxflow, Mincut, Total Time"<<endl;
-    for(size=MIN_SIZE; size<=MAX_SIZE; size*=2)
-    {
-        DirectedFlowGraph graph(size);
-        percent=rand()%100;
-        cout<<"Teseting graph of size "<<size<<"with random number of connections"<<"\n====================="<<endl;
-        graph.populateRandom(size, percent);
-
-        time_start=clock();
-        max_flow=EdmondsKarpMaxflow(graph);
-        time_end=clock();
-        mincut=CalculateMinCut(graph);
-        total_time=time_end-time_start;
-
-        output_file<<size<< ','<<percent<<','<<max_flow<<','<<mincut<<','<<total_time<<endl;
-
-
-        output_file.close();
-    }
-
-
-    return;
+	int size, time_start, time_end, total_time, max_flow;
+	float percent;
+	ofstream output_file;
+	vector<DirectedFlowGraph::DirectedFlowEdge> mincut;
+	output_file.open("results.csv", ios::trunc);
+	
+	output_file<<"Graph size, Total Time"<<endl;
+	for(size=MIN_SIZE; size<=MAX_SIZE; size*=2)
+	{
+		for(int j=0; j<10; j++)
+		{
+			DirectedFlowGraph graph(size);
+			percent=rand()%100;
+			cout<<"Teseting graph of size "<<size<<"with random number of connections"<<"\n====================="<<endl;
+			graph.populateRandom(size, percent);
+		
+			time_start=clock();
+			max_flow=EdmondsKarpMaxflow(graph);
+			time_end=clock();
+			mincut=CalculateMinCut(graph);
+			total_time=time_end-time_start;
+		
+			output_file<<size<<total_time<<endl;
+			cout<<"Graph Size: "<<size<<"\n Percent Connection: "<<percent<<"\n Maxflow: "<<max_flow
+			<<"\n Mincut: "<<mincut<<"\n Total Time: "<<total_time<<endl;
+		}
+		
+	}
+	output_file.close();
+	
+	return;	
 }
 
 void TestDirectedFlowGraph(DirectedFlowGraph& target)
