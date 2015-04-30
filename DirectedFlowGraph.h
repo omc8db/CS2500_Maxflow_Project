@@ -13,11 +13,6 @@
 #include <stdlib.h>
 #include <assert.h>
 
-const int MIN_SIZE=4;
-const int MAX_SIZE=8192;//2^16
-
-void autotest();
-
 class DirectedFlowGraph
 {
 public:
@@ -47,7 +42,8 @@ public:
 
 // Outputs the directed flow graph in the form of XML
   friend std::ostream& operator<<(std::ostream& out, DirectedFlowGraph& rhs);
-  friend std::ostream& operator<<(std::ostream& out, vector<DirectedFlowGraph::DirectedFlowEdge>& input);
+  friend std::ostream& operator<<(std::ostream& out,
+      std::vector<DirectedFlowGraph::DirectedFlowEdge>& input);
   //Outputs the number of nodes in the graph, including source and sink
   int getNumNodes();
 

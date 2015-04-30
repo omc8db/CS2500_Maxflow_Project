@@ -12,6 +12,8 @@
 #include <queue>
 #include <vector>
 
+using namespace std;
+
 // Calculates the maxflow for a given DirectedFlowGraph
 // Inputs: graph to calculate maxflow for
 // Outputs: Returns maxflow value

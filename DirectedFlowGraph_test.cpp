@@ -5,15 +5,7 @@
  *      Author: Owen Chiaventone
  */
 
-#include "DirectedFlowGraph.h"
-#include "EdmondsKarp.h"
-#include "EdmondsKarp.h"
-#include <iostream>
-#include <time.h>
-#include <stdlib.h>
-#include <fstream>
-#include <vector>
-using namespace std;
+#include "DirectedFlowGraph_test.h"
 
 void edgeTest(DirectedFlowGraph& target, DirectedFlowGraph::Node node);
 
