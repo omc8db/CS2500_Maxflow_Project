@@ -47,7 +47,7 @@ public:
 
 // Outputs the directed flow graph in the form of XML
   friend std::ostream& operator<<(std::ostream& out, DirectedFlowGraph& rhs);
-
+  friend std::ostream& operator<<(std::ostream& out, vector<DirectedFlowGraph::DirectedFlowEdge>& input);
   //Outputs the number of nodes in the graph, including source and sink
   int getNumNodes();
 

@@ -6,10 +6,13 @@
  */
 
 #include "DirectedFlowGraph.h"
+#include "EdmondsKarp.h"
+#include "EdmondsKarp.h"
 #include <iostream>
 #include <time.h>
 #include <stdlib.h>
 #include <fstream>
+#include <vector>
 using namespace std;
 
 void edgeTest(DirectedFlowGraph& target, DirectedFlowGraph::Node node);
@@ -80,7 +83,7 @@ void autotest()
 	vector<DirectedFlowGraph::DirectedFlowEdge> mincut;
 	output_file.open("results.csv", ios::trunc);
 	
-	output_file<<"Graph size, Percent Connections, Maxflow, Total Time"<<endl;
+	output_file<<"Graph size, Percent Connections, Maxflow, Mincut, Total Time"<<endl;
 	for(size=MIN_SIZE; size<=MAX_SIZE; size*=2)
 	{
 		DirectedFlowGraph graph(size);
@@ -89,12 +92,12 @@ void autotest()
 		graph.populateRandom(size, percent);
 		
 		time_start=clock();
-		max_flow=10;//EdmondsKarpMaxFlow(graph);
+		max_flow=EdmondsKarpMaxFlow(graph);
 		time_end=clock();
-		//mincut=CalculateMincut(graph);
+		mincut=CalculateMincut(graph);
 		total_time=time_end-time_start;
 		
-		output_file<<size<< ','<<percent<<','<<max_flow<<','<</*mincut<<','<<*/total_time<<endl;
+		output_file<<size<< ','<<percent<<','<<max_flow<<','<<mincut<<','<<total_time<<endl;
 		
 		
 		output_file.close();
@@ -102,4 +105,13 @@ void autotest()
 	
 	
 	return;	
+}
+
+std::ostream& operator<<(std::ostream & out, vector<DirectedFlowGraph::DirectedFlowEdge>& input)
+{
+	for(int i=0; i<input.size(); i++)
+	{
+		out<<"("<<input[i].parent<<","<<input[i].child<<")";
+	}
+	return out;
 }

@@ -34,6 +34,7 @@ int main()
 			case 1://auto tester
 				cout<<"Starting automatic testing. Results will output to file: "<<endl;
 				autotest();
+				cout<<"Results in result.csv file"<<endl;
 				
 				break;
 			
