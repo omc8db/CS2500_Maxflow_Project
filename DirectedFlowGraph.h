@@ -13,6 +13,11 @@
 #include <stdlib.h>
 #include <assert.h>
 
+const int MIN_SIZE=4;
+const int MAX_SIZE=8192;//2^16
+
+void autotest();
+
 class DirectedFlowGraph
 {
 public:

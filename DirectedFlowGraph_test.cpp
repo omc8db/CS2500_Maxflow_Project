@@ -6,6 +6,10 @@
  */
 
 #include "DirectedFlowGraph.h"
+#include <iostream>
+#include <time.h>
+#include <stdlib.h>
+#include <fstream>
 using namespace std;
 
 void edgeTest(DirectedFlowGraph& target, DirectedFlowGraph::Node node);
@@ -66,4 +70,36 @@ void edgeTest(DirectedFlowGraph& target, DirectedFlowGraph::Node node)
   }
   cout << endl;
 
+}
+
+void autotest()
+{
+	int size, time_start, time_end, total_time, max_flow;
+	float percent;
+	ofstream output_file;
+	vector<DirectedFlowGraph::DirectedFlowEdge> mincut;
+	output_file.open("results.csv", ios::trunc);
+	
+	output_file<<"Graph size, Percent Connections, Maxflow, Total Time"<<endl;
+	for(size=MIN_SIZE; size<=MAX_SIZE; size*=2)
+	{
+		DirectedFlowGraph graph(size);
+		percent=rand()%100;
+		cout<<"Teseting graph of size "<<size<<"with random number of connections"<<"\n====================="<<endl;
+		graph.populateRandom(size, percent);
+		
+		time_start=clock();
+		max_flow=10;//EdmondsKarpMaxFlow(graph);
+		time_end=clock();
+		//mincut=CalculateMincut(graph);
+		total_time=time_end-time_start;
+		
+		output_file<<size<< ','<<percent<<','<<max_flow<<','<</*mincut<<','<<*/total_time<<endl;
+		
+		
+		output_file.close();
+	}
+	
+	
+	return;	
 }

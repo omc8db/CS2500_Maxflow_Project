@@ -20,6 +20,31 @@ int main()
   srand(time(NULL));
   DirectedFlowGraph test(6);
   TestDirectedFlowGraph(test);
+  int choice;
+  cout<<"Maxflow Tester"<<endl;
+	
+	do
+	{
+		cout<<"Options: "<<endl;
+		cout<<"\t1. Run automated tester "<<endl;
+		cout<<"\t2. Exit"<<endl;
+		cin>>choice;
+		switch(choice)
+		{
+			case 1://auto tester
+				cout<<"Starting automatic testing. Results will output to file: "<<endl;
+				autotest();
+				
+				break;
+			
+			case 2://exit
+				break;
+			
+			default:
+				cout<<"Command not recognized. Try again"<<endl;
+				
+		}
+	}while(choice!=2);
 
 
   return 0;
