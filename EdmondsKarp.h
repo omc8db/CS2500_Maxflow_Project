@@ -15,6 +15,7 @@
 
 //Reserve a value of negative one to represent infinite possible flow
 const int INFINITY = -1;
+const DirectedFlowGraph::Node NULL_NODE = {-1};
 
 
 // Calculates the maxflow for a given DirectedFlowGraph
