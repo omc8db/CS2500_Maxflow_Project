@@ -234,3 +234,31 @@ void DirectedFlowGraph::setFlow(DirectedFlowEdge& edge, int flow)
   m_adjacency_matrix[edge.parent.index][edge.child.index].flow = flow;
   edge.flow = flow;
 }
+
+void DirectedFlowGraph::augment(const Node& from, const Node& to, int amount)
+{
+  //Check if there is a direct connection. Otherwise we will be reversing flow
+  if (m_adjacency_matrix[from.index][to.index].capacity > 0)
+  {
+    //Invariant: Flow cannot be increased beyond capacity
+    m_adjacency_matrix[from.index][to.index].flow += amount;
+    assert(
+        m_adjacency_matrix[from.index][to.index].flow
+            < m_adjacency_matrix[from.index][to.index].capacity);
+
+  }
+
+  //Check to see if we're reversing existing flow
+  else if (m_adjacency_matrix[to.index][from.index].capacity > 0)
+  {
+    m_adjacency_matrix[to.index][from.index].flow -= amount;
+    //Invariant: Flow cannot be reduced below zero
+    assert(m_adjacency_matrix[to.index][from.index].flow >= 0);
+  }
+
+  //Trying to add flow to an edge that doesn't exist
+  else
+  {
+    assert(false);
+  }
+}

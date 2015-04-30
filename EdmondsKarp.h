@@ -9,8 +9,13 @@
 #define EDMONDSKARP_H_
 
 #include "DirectedFlowGraph.h"
-#include <queue>
+#include <deque>
 #include <vector>
+#include <algorithm>
+
+//Reserve a value of negative one to represent infinite possible flow
+const int INFINITY = -1;
+const DirectedFlowGraph::Node NULL_NODE = {-1};
 
 using namespace std;
 

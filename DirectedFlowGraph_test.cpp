@@ -7,6 +7,7 @@
 
 #include "DirectedFlowGraph_test.h"
 
+using namespace std;
 void edgeTest(DirectedFlowGraph& target, DirectedFlowGraph::Node node);
 
 void TestDirectedFlowGraph(DirectedFlowGraph& target)

@@ -42,8 +42,7 @@ public:
 
 // Outputs the directed flow graph in the form of XML
   friend std::ostream& operator<<(std::ostream& out, DirectedFlowGraph& rhs);
-  friend std::ostream& operator<<(std::ostream& out,
-      std::vector<DirectedFlowGraph::DirectedFlowEdge>& input);
+
   //Outputs the number of nodes in the graph, including source and sink
   int getNumNodes();
 
@@ -70,6 +69,8 @@ public:
   // Specified flow must be greater than 0 and less than or equal to the capacity of the edge
   void setFlow(DirectedFlowEdge& edge, int flow);
 
+  //Adds the specified amount of flow between the given nodes
+  void augment(const Node& from, const Node& to, int amount);
 private:
 //---------------Types----------------------//
   struct adjacencyMatrixEntry
