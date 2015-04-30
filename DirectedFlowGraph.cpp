@@ -244,7 +244,7 @@ void DirectedFlowGraph::augment(const Node& from, const Node& to, int amount)
     m_adjacency_matrix[from.index][to.index].flow += amount;
     assert(
         m_adjacency_matrix[from.index][to.index].flow
-            < m_adjacency_matrix[from.index][to.index].capacity);
+            <= m_adjacency_matrix[from.index][to.index].capacity);
 
   }
 
