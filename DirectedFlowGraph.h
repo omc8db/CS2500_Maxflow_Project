@@ -69,6 +69,8 @@ public:
   // Specified flow must be greater than 0 and less than or equal to the capacity of the edge
   void setFlow(DirectedFlowEdge& edge, int flow);
 
+  //Adds the specified amount of flow between the given nodes
+  void augment(const Node& from, const Node& to, int amount);
 private:
 //---------------Types----------------------//
   struct adjacencyMatrixEntry
