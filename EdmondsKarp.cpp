@@ -33,28 +33,54 @@ int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
 
     //No nodes start out inserted
     inserted = new bool[graph.getNumNodes()];
-    value = new int[graph.getNumNodes];
+	
+	int numNodes = graph.getNumNodes();
+	
+    value = new int[numNodes];
     for(int i = 0; i < graph.getNumNodes(); i++)
     {
       inserted[i] = false;
       value[i] = 0;
       //TODO: assert
     }
-
+	
+	//vector edges = edges out of current node
     edges = graph.getOutEdges(current);
     for(int i = 0; i < edges.size(); i++)
     {
       if(inserted[edges[i].child.index] == false)
       {
+		//slack of edge i = capacity of edge - flow on the edge 
         slack = edges[i].capacity - edges[i].flow;
         assert(slack >= 0);
         if(slack > 0)
         {
+	 	//sets the temp node to the child of edge i
           temp = edges[i].child;
+		  Q.push_back(temp);
+		  inserted[i] = true;
 
         }
       }
-
+	 //-------------------------------------------- 
+		for(int x = 0; x < edges.size(); x++)
+		{
+			std::vector<int> flowTracker;
+			if(inserted[x] == true)
+			{
+				flowTracker[x] = edges[x].capacity;
+			}
+		}
+		int smallestCap;
+		smallestCap = flowTracker[0];
+		for(int x = 1; x < flowTracker.size; x++)
+		{
+			if(flowTracker[x] < smallestCap)
+			{
+				smallestCap = flowTracker;  
+			}
+		}
+	//-----------------------------------------------	
       delete[] inserted;
       delete[] value;
     }
