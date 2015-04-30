@@ -133,8 +133,8 @@ int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
   delete[] parent;
   delete[] inserted;
   delete[] value;
-  //Dummy value
-  return 1;
+
+  return maxflow;
 }
 
 std::vector<DirectedFlowGraph::DirectedFlowEdge> CalculateMinCut(
