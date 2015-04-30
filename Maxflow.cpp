@@ -7,7 +7,7 @@
 //============================================================================
 
 #include <iostream>
-#include "DirectedFlowGraph.h"
+#include "tester.h"
 //#include "DirectedFlowGraph_test.cpp"
 using namespace std;
 
