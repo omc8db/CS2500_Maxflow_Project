@@ -59,28 +59,10 @@ int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
           temp = edges[i].child;
 		  Q.push_back(temp);
 		  inserted[i] = true;
-
         }
+		
       }
-	 //-------------------------------------------- 
-		for(int x = 0; x < edges.size(); x++)
-		{
-			std::vector<int> flowTracker;
-			if(inserted[x] == true)
-			{
-				flowTracker[x] = edges[x].capacity;
-			}
-		}
-		int smallestCap;
-		smallestCap = flowTracker[0];
-		for(int x = 1; x < flowTracker.size; x++)
-		{
-			if(flowTracker[x] < smallestCap)
-			{
-				smallestCap = flowTracker;  
-			}
-		}
-	//-----------------------------------------------	
+
       delete[] inserted;
       delete[] value;
     }
