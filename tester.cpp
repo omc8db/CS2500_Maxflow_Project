@@ -28,7 +28,7 @@ void autotest()
 			DirectedFlowGraph graph(size);
 			percent=rand()%100;
 			cout<<"Teseting graph of size "<<size<<"with random number of connections"<<"\n====================="<<endl;
-			graph.populateRandom(size, percent);
+			graph.populateRandom(size, 100);
 		
 			time_start=clock();
 			max_flow=EdmondsKarpMaxflow(graph);

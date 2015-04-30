@@ -17,7 +17,7 @@ extern void TestDirectedFlowGraph(DirectedFlowGraph& target);
 int main()
 {
   cout << "Beginning Test" << endl; // prints !!!Hello World!!!
-  srand(time(NULL));
+ // srand(time(NULL));
   DirectedFlowGraph test(6);
   TestDirectedFlowGraph(test);
   int choice;

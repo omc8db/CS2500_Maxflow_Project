@@ -45,7 +45,7 @@ int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
     Q.push_back(current);
     inserted[current.index] = true;
 
-    while (!Q.empty() && foundSink == false)
+    while ((!Q.empty()) && (foundSink == false))
     {
       current = Q.front();
       Q.pop_front();
