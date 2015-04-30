@@ -17,7 +17,6 @@
 const int INFINITY = -1;
 const DirectedFlowGraph::Node NULL_NODE = {-1};
 
-
 // Calculates the maxflow for a given DirectedFlowGraph
 // Inputs: graph to calculate maxflow for
 // Outputs: Returns maxflow value

@@ -94,6 +94,7 @@ int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
       {
         if (inserted[edges[i].parent.index] == false)
         {
+          //The slack in an edge we traverse backward is the flow through it
           slack = edges[i].flow;
           assert(slack >= 0);
 
