@@ -29,7 +29,9 @@ void autotest()
 			percent=rand()%100;
 			cout<<"Teseting graph of size "<<size<<"with random number of connections"<<"\n====================="<<endl;
 			graph.populateRandom(size, 100);
-		
+
+			cout << graph;
+
 			time_start=clock();
 			max_flow=EdmondsKarpMaxflow(graph);
 			time_end=clock();

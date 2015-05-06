@@ -40,96 +40,91 @@ int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
       //TODO: assert
     }
 
-    current = graph.getSource();
-    value[current.index] = INFINITY;
-    Q.push_back(current);
-    inserted[current.index] = true;
+    //Always start the search at the source
+    Q.push_back(graph.getSource());
 
-    while ((!Q.empty()) && (foundSink == false))
+    inserted[graph.getSource().index] = true;
+    value[graph.getSource().index] = INFINITY;
+    //parent of source is null
+
+    while (!Q.empty())
     {
       current = Q.front();
       Q.pop_front();
 
-      //vector edges = edges out of current node
-      //Getting all edges for which the current node is the parent node
-      edges = graph.getOutEdges(current);
+      edges = graph.getAllEdges(current);
       for (unsigned int i = 0; i < edges.size(); i++)
       {
-        if (inserted[edges[i].child.index] == false)
+        if (edges[i].parent == current) // Forward flow
         {
-          //slack of edge i = capacity of edge - flow on the edge
-          slack = edges[i].capacity - edges[i].flow;
-          assert(slack >= 0);
-
-          if (slack > 0)
+          if (!inserted[edges[i].child.index])
           {
-            //add the child node to the queue and update its properties
-            temp = edges[i].child;
-            Q.push_back(temp);
-            inserted[edges[i].child.index] = true;
-            parent[edges[i].child.index] = current;
-
-            //Check if the parent can source infinite flow (i.e. is the source)
-            if (value[edges[i].parent.index] == INFINITY)
-              value[edges[i].child.index] = slack;
-            else
-              value[edges[i].child.index] = std::min(slack,
-                  value[current.index]);
+            slack = edges[i].capacity - edges[i].flow;
+            assert(slack >= 0);
+            if (slack > 0)
+            {
+              Q.push_back(edges[i].child);
+              inserted[edges[i].child.index] = true;
+              parent[edges[i].child.index] = current;
+              //Value calculation is a little complicated
+              if (value[current.index] == INFINITY)
+                value[edges[i].child.index] = slack;
+              else
+                value[edges[i].child.index] = std::min(slack,
+                    value[current.index]);
+            }
           }
-
-          //check if we've found the sink
-          if (edges[i].child.index == graph.getSink().index)
+        }
+        else if (edges[i].child == current) // reverse flow
+        {
+          if (!inserted[edges[i].parent.index])
           {
-            std::cout << "FOUND SINK!" << std::endl;
-            foundSink = true;
-          }
+            slack = edges[i].flow;
+            if (slack > 0)
+            {
+              Q.push_back(edges[i].parent);
+              inserted[edges[i].parent.index] = true;
 
+              // if we're sending flow backwards, when we augment we will go from child to parent
+              parent[edges[i].parent.index] = current;
+              value[edges[i].parent.index] = slack;
+            }
+          }
+        } else
+        {
+          cout << "Error: Edge does not connect to current node";
+          assert(false);
         }
 
-      }
-
-      //Get all edges for which the current node is the child
-      edges = graph.getInEdges(current);
-      for (unsigned int i = 0; i < edges.size(); i++)
-      {
-        if (inserted[edges[i].parent.index] == false)
+        if (inserted[graph.getSink().index])
         {
-          //The slack in an edge we traverse backward is the flow through it
-          slack = edges[i].flow;
-          assert(slack >= 0);
 
-          //Check if we can push flow backwards
-          if (slack > 0)
-          {
-            temp = edges[i].parent;
-            Q.push_back(temp);
-            inserted[edges[i].parent.index] = true;
-            //Flow will go backwards here, so from the current node to the parent
-            parent[edges[i].parent.index] = current;
-            value[edges[i].parent.index] = std::min(slack,
-                value[current.index]);
-          }
+          cout << "Got the sink" << endl;
+          foundSink = true;
+          //Clear the queue so we know to stop
+          Q.clear();
         }
       }
     }
 
-    //Invariant: A path has been found from the source to the sink
-
-    //Augment the path
-    if (foundSink)
+    if(foundSink)
     {
-      //Work backwards from sink to source
+      current_flow = value[graph.getSink().index];
+      assert(current_flow > 0);
+
       temp = graph.getSink();
-      current_flow = value[temp.index]; //Amount of flow we could push to the sink
-      while (temp.index != graph.getSource().index)
+      while(!(temp == graph.getSource()))
       {
+        assert(!(parent[temp.index] == NULL_NODE));
         graph.augment(parent[temp.index], temp, current_flow);
         temp = parent[temp.index];
       }
 
-      maxflow += current_flow;
     }
   }
+  //Invariant: A path has been found from the source to the sink
+
+  //Augment the path
   delete[] parent;
   delete[] inserted;
   delete[] value;
@@ -138,14 +133,14 @@ int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
 }
 
 std::vector<DirectedFlowGraph::DirectedFlowEdge> CalculateMinCut(
-    DirectedFlowGraph& graph)
+    DirectedFlowGraph & graph)
 {
   DirectedFlowGraph::Node source = graph.getSource();
   return RecursiveMinCut(graph, source);
 }
 
 std::vector<DirectedFlowGraph::DirectedFlowEdge> RecursiveMinCut(
-    DirectedFlowGraph& graph, DirectedFlowGraph::Node& node)
+    DirectedFlowGraph & graph, DirectedFlowGraph::Node & node)
 {
   std::vector<DirectedFlowGraph::DirectedFlowEdge> out_edges, result;
   out_edges = graph.getOutEdges(node);

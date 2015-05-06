@@ -18,8 +18,8 @@ int main()
 {
   cout << "Beginning Test" << endl; // prints !!!Hello World!!!
  // srand(time(NULL));
-  DirectedFlowGraph test(6);
-  TestDirectedFlowGraph(test);
+//  DirectedFlowGraph test(6);
+//  TestDirectedFlowGraph(test);
   int choice;
   cout<<"Maxflow Tester"<<endl;
 	

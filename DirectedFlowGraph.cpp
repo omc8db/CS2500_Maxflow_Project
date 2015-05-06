@@ -262,3 +262,9 @@ void DirectedFlowGraph::augment(const Node& from, const Node& to, int amount)
     assert(false);
   }
 }
+
+bool operator==(const DirectedFlowGraph::Node& lhs,
+    const DirectedFlowGraph::Node& rhs)
+{
+  return (lhs.index == rhs.index);
+}

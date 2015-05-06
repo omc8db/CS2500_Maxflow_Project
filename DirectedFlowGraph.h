@@ -30,6 +30,7 @@ public:
     DirectedFlowGraph::Node child;
   };
 
+
 //---------------Constructor / Destructor----------------------//
 
 // Create a new directed flow graph
@@ -87,4 +88,6 @@ private:
   int m_num_nodes;
 };
 
+
+bool operator==(const DirectedFlowGraph::Node& lhs, const DirectedFlowGraph::Node& rhs);
 #endif /* DIRECTEDFLOWGRAPH_H_ */
