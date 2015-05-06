@@ -73,6 +73,7 @@ int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
                 value[edges[i].child.index] = std::min(slack,
                     value[current.index]);
             }
+            assert(value[edges[i].child.index] <= slack);
           }
         }
         else if (edges[i].child == current) // reverse flow
@@ -89,8 +90,10 @@ int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
               parent[edges[i].parent.index] = current;
               value[edges[i].parent.index] = slack;
             }
+            assert(value[edges[i].parent.index] <= slack);
           }
-        } else
+        }
+        else
         {
           cout << "Error: Edge does not connect to current node";
           assert(false);
@@ -98,8 +101,6 @@ int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
 
         if (inserted[graph.getSink().index])
         {
-
-          cout << "Got the sink" << endl;
           foundSink = true;
           //Clear the queue so we know to stop
           Q.clear();
@@ -107,20 +108,22 @@ int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
       }
     }
 
-    if(foundSink)
+    if (foundSink)
     {
       current_flow = value[graph.getSink().index];
       assert(current_flow > 0);
 
       temp = graph.getSink();
-      while(!(temp == graph.getSource()))
+      while (!(temp == graph.getSource()))
       {
         assert(!(parent[temp.index] == NULL_NODE));
+        assert(value[temp.index] >= current_flow);
         graph.augment(parent[temp.index], temp, current_flow);
         temp = parent[temp.index];
       }
 
     }
+    cout << graph << endl << endl;
   }
   //Invariant: A path has been found from the source to the sink
 
