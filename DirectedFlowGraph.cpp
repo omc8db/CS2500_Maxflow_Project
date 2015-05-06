@@ -179,6 +179,9 @@ void DirectedFlowGraph::populateRandom(int max_capacity,
       {
         m_adjacency_matrix[i][j].capacity = 0;
       }
+
+      //Flow always starts at 0
+      m_adjacency_matrix[i][j].flow = 0;
     }
   }
 
