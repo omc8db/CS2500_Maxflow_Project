@@ -38,8 +38,10 @@ void autotest()
 //			mincut=CalculateMinCut(graph);
 			total_time=time_end-time_start;
 
-//			cout << graph << endl;
-		
+#ifndef NDEBUG
+			cout << graph << endl;
+#endif
+
 			output_file<<size<< ", " << total_time<<endl;
 			cout<<"Graph Size: "<<size<< "\n Maxflow: "<<max_flow
 			<<"\n Mincut: (skipped) " <<"\n Total Time: "<<total_time<<endl;

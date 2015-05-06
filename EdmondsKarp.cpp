@@ -37,7 +37,6 @@ int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
       inserted[i] = false;
       value[i] = 0;
       parent[i] = NULL_NODE;
-      //TODO: assert
     }
 
     //Always start the search at the source
@@ -63,7 +62,6 @@ int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
             assert(slack >= 0);
             if (slack > 0)
             {
-              //TODO: Find out why this isn't pushing the child correctly
               Q.push_back(edges[i].child);
               inserted[edges[i].child.index] = true;
               parent[edges[i].child.index] = current;

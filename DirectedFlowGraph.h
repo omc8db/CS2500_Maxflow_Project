@@ -8,6 +8,8 @@
 #ifndef DIRECTEDFLOWGRAPH_H_
 #define DIRECTEDFLOWGRAPH_H_
 
+#define NDEBUG
+
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
