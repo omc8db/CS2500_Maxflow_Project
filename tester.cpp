@@ -30,17 +30,19 @@ void autotest()
 			cout<<"Teseting graph of size "<<size<<"with random number of connections"<<"\n====================="<<endl;
 			graph.populateRandom(size, 100);
 
-			cout << graph;
+//			cout << graph << endl;
 
 			time_start=clock();
 			max_flow=EdmondsKarpMaxflow(graph);
 			time_end=clock();
-			mincut=CalculateMinCut(graph);
+//			mincut=CalculateMinCut(graph);
 			total_time=time_end-time_start;
+
+//			cout << graph << endl;
 		
 			output_file<<size<<total_time<<endl;
 			cout<<"Graph Size: "<<size<<"\n Percent Connection: "<<percent<<"\n Maxflow: "<<max_flow
-			<<"\n Mincut: "<<mincut<<"\n Total Time: "<<total_time<<endl;
+			<<"\n Mincut: (skipped) " <<"\n Total Time: "<<total_time<<endl;
 		}
 		
 	}

@@ -114,6 +114,7 @@ int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
       current_flow = value[graph.getSink().index];
       assert(current_flow > 0);
 
+      maxflow += current_flow;
       temp = graph.getSink();
       while (!(temp == graph.getSource()))
       {
@@ -124,7 +125,7 @@ int EdmondsKarpMaxflow(DirectedFlowGraph& graph)
       }
 
     }
-    cout << graph << endl << endl;
+//    cout << graph << endl << endl;
   }
   //Invariant: A path has been found from the source to the sink
 
