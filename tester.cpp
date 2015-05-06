@@ -21,13 +21,13 @@ void autotest()
 	output_file.open("results.csv", ios::trunc);
 	
 	output_file<<"Graph size, Total Time"<<endl;
-	for(size=MIN_SIZE; size<=MAX_SIZE; size*=2)
+	for(size=MIN_SIZE; size<=MAX_SIZE; size+=STEP)
 	{
 		for(int j=0; j<10; j++)
 		{
 			DirectedFlowGraph graph(size);
 			percent=rand()%100;
-			cout<<"Teseting graph of size "<<size<<"with random number of connections"<<"\n====================="<<endl;
+			cout<<"Teseting graph of size "<<size<<" with random number of connections"<<"\n====================="<<endl;
 			graph.populateRandom(size, 100);
 
 //			cout << graph << endl;
@@ -40,8 +40,8 @@ void autotest()
 
 //			cout << graph << endl;
 		
-			output_file<<size<<total_time<<endl;
-			cout<<"Graph Size: "<<size<<"\n Percent Connection: "<<percent<<"\n Maxflow: "<<max_flow
+			output_file<<size<< ", " << total_time<<endl;
+			cout<<"Graph Size: "<<size<< "\n Maxflow: "<<max_flow
 			<<"\n Mincut: (skipped) " <<"\n Total Time: "<<total_time<<endl;
 		}
 		

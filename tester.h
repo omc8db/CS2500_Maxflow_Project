@@ -11,7 +11,8 @@
 #include "EdmondsKarp.h"
 
 const int MIN_SIZE=4;
-const int MAX_SIZE=8192;//2^16
+const int MAX_SIZE=255;//2^16
+const int STEP = 10;
 
 void autotest();
 void TestDirectedFlowGraph(DirectedFlowGraph& target);
